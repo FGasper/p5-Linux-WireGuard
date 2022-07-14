@@ -1,0 +1,6 @@
+[submodule "wireguard-tools"]
+	path = wireguard-tools
+	url = git://git.zx2c4.com/wireguard-tools
+[submodule "easyxs"]
+	path = easyxs
+	url = https://github.com/FGasper/easyxs

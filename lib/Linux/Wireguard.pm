@@ -1,0 +1,119 @@
+package Linux::Wireguard;
+
+use strict;
+use warnings;
+
+=encoding utf-8
+
+=head1 NAME
+
+Linux::Wireguard - L<Wireguard|https://www.wireguard.com/> in Perl
+
+=head1 SYNOPSIS
+
+    my @names = Linux::Wireguard::list_device_names();
+
+    my %device = map { $_ => Linux::Wireguard::get_device($_) } @names;
+
+=head1 DESCRIPTION
+
+Linux::Wireguard provides an interface to Wireguard via the
+embedded wireguard C library.
+
+=cut
+
+#----------------------------------------------------------------------
+
+use XSLoader;
+
+our $VERSION = '0.01';
+
+XSLoader::load( __PACKAGE__, $VERSION );
+
+#----------------------------------------------------------------------
+
+=head1 FUNCTIONS
+
+=head2 @names = list_device_names()
+
+Returns a list of strings.
+
+=head2 $dev_hr = get_device( $NAME )
+
+Returns a reference to a hash that describes the $NAME’d device:
+
+=over
+
+=item * C<name>
+
+=item * C<ifindex>
+
+=item * C<public_key> and C<private_key> (raw strings, or undef)
+
+=item * C<fwmark> (can be undef)
+
+=item * C<listen_port> (can be undef)
+
+=item * C<peers> - reference to an array of hash references. Each hash is:
+
+=over
+
+=item * C<public_key> and C<preshared_key> (raw strings, or undef)
+
+=item * C<endpoint> - Raw sockaddr data (a string). To parse it,
+use L<Socket>’s C<sockaddr_family()>, C<unpack_sockaddr_in()>, and
+C<unpack_sockaddr_in6()>.
+
+=item * C<rx_bytes> and C<tx_bytes>
+
+=item * C<persistent_keepalive_interval> (can be undef)
+
+=item * C<last_handshake_time_sec> and C<last_handshake_time_nsec>
+
+=item * C<allowed_ips> - reference to an array of hash references. Each hash is:
+
+=over
+
+=item * C<family> - Socket::AF_INET or Socket::AF_INET6
+
+=item * C<addr> - A packed IPv4 or IPv6 address. Unpack with L<Socket>’s
+C<inet_ntoa()> or C<inet_ntop()>.
+
+=item * C<cidr>
+
+=back
+
+=back
+
+=back
+
+=head2 $bin = generate_private_key()
+
+Returns a newly-generated private key (raw string).
+
+=head2 $bin = generate_public_key( $PRIVATE_KEY )
+
+Takes a private key and returns its public key. (Both raw strings.)
+
+=head2 $bin = generate_preshared_key()
+
+Returns a newly-generated preshared key (raw string).
+
+=head1 TODO
+
+The interface is incomplete. It would be nice for it to be complete.
+
+=head1 LICENSE & COPYRIGHT
+
+Copyright 2022 Gasper Software Consulting. All rights reserved.
+
+Linux::Wireguard is licensed under the same terms as Perl itself (cf.
+L<perlartistic>); B<HOWEVER>, the embedded C wireguard library has its
+own copyright terms. Use of Linux::Wireguard I<may> imply acceptance of
+that embedded C library’s own copyright terms. See
+F<wireguard-tools/contrib/embeddable-wg-library/README> in this
+distribution for details.
+
+=cut
+
+1;
