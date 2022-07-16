@@ -17,6 +17,8 @@ easyxs/init.h
 easyxs/ppport.h
 lib/Linux/Wireguard.pm
 libwireguard.c
+t/devices.t
+t/keys.t
 wireguard-tools/COPYING
 wireguard-tools/README.md
 wireguard-tools/contrib/dns-hatchet/README

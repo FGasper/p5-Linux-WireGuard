@@ -3,6 +3,8 @@ use warnings;
 
 use ExtUtils::MakeMaker::CPANfile;
 
+die "OS not supported: $^O$/" if $^O ne 'linux';
+
 WriteMakefile(
     NAME              => 'Linux::Wireguard',
     VERSION_FROM      => 'lib/Linux/Wireguard.pm', # finds $VERSION
