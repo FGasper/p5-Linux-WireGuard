@@ -17,11 +17,11 @@ is(
     '2 private keys are same length',
 );
 
-my $pub = Linux::Wireguard::generate_private_key($str);
+my $pub = Linux::Wireguard::generate_public_key($str);
 
 is(
     $pub,
-    Linux::Wireguard::generate_private_key($str),
+    Linux::Wireguard::generate_public_key($str),
     'public key generated the same twice',
 );
 
