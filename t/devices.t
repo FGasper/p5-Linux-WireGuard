@@ -53,4 +53,6 @@ cmp_deeply(
     'get_device()',
 ) or diag explain \@devices;
 
+note explain \@devices;
+
 done_testing;
