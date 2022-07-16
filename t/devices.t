@@ -25,6 +25,9 @@ my $uint_re = re( qr<\A[0-9]+\z> );
 my $optional_uint_re = any( undef, $uint_re );
 my $optional_str = any( undef, re( qr<.> ) );
 
+my $ipv4_addr_len = length pack_sockaddr_in(0, "\0" x 4);
+my $ipv6_addr_len = length pack_sockaddr_in6(0, "\0" x 16);
+
 cmp_deeply(
     \@devices,
     array_each( {
@@ -37,7 +40,11 @@ cmp_deeply(
         peers => array_each( {
             public_key => $optional_str,
             preshared_key => $optional_str,
-            endpoint => re( qr<.> ),
+            endpoint => any(
+                undef,
+                re( qr<\A.{$ipv4_addr_len}\z> ),
+                re( qr<\A.{$ipv6_addr_len}\z> ),
+            ),
             rx_bytes => $uint_re,
             tx_bytes => $uint_re,
             persistent_keepalive_interval => $optional_uint_re,

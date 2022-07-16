@@ -43,6 +43,8 @@ static HV* _wgpeer_to_hv (pTHX_ wg_peer *peer) {
 
     unsigned endpoint_len = 0;
     switch (peer->endpoint.addr.sa_family) {
+        case 0:
+            break;
         case AF_INET:
             endpoint_len = sizeof(struct sockaddr_in);
             break;
@@ -53,7 +55,7 @@ static HV* _wgpeer_to_hv (pTHX_ wg_peer *peer) {
             assert(0);
     }
 
-    hv_stores(hv, "endpoint", newSVpvn((char*) &peer->endpoint, endpoint_len));
+    hv_stores(hv, "endpoint", endpoint_len ? newSVpvn((char*) &peer->endpoint, endpoint_len) : &PL_sv_undef);
 
     hv_stores(hv, "rx_bytes", newSVuv(peer->rx_bytes));
     hv_stores(hv, "tx_bytes", newSVuv(peer->tx_bytes));
