@@ -52,7 +52,7 @@ cmp_deeply(
             last_handshake_time_nsec => $uint_re,
             allowed_ips => array_each( {
                 family => any( Socket::AF_INET, Socket::AF_INET6 ),
-                addr => qr<\A.{4}|.{16}\z>,
+                addr => re( qr<\A.{4}|.{16}\z> ),
                 cidr => $uint_re,
             } ),
         } ),
