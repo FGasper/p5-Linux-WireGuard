@@ -1,4 +1,8 @@
 Revision history for Perl extension Linux::Wireguard:
 
+0.02
+- Added tests.
+- Make `endpoint` undef if there is no endpoint for a given peer.
+
 0.01 Sat 16 Jul 2022
 - Initial release

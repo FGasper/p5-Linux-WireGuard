@@ -60,9 +60,10 @@ Returns a reference to a hash that describes the $NAME’d device:
 
 =item * C<public_key> and C<preshared_key> (raw strings, or undef)
 
-=item * C<endpoint> - Raw sockaddr data (a string). To parse it,
-use L<Socket>’s C<sockaddr_family()>, C<unpack_sockaddr_in()>, and
-C<unpack_sockaddr_in6()>.
+=item * C<endpoint> - Raw sockaddr data (a string), or undef. To parse
+the sockaddr, use L<Socket>’s C<sockaddr_family()> to determine the
+address family, then C<unpack_sockaddr_in()> for Socket::AF_INET or
+C<unpack_sockaddr_in6()> for Socket::AF_INET6.
 
 =item * C<rx_bytes> and C<tx_bytes>
 

@@ -30,9 +30,10 @@ Returns a reference to a hash that describes the $NAME’d device:
 - `listen_port` (can be undef)
 - `peers` - reference to an array of hash references. Each hash is:
     - `public_key` and `preshared_key` (raw strings, or undef)
-    - `endpoint` - Raw sockaddr data (a string). To parse it,
-    use [Socket](https://metacpan.org/pod/Socket)’s `sockaddr_family()`, `unpack_sockaddr_in()`, and
-    `unpack_sockaddr_in6()`.
+    - `endpoint` - Raw sockaddr data (a string), or undef. To parse
+    the sockaddr, use [Socket](https://metacpan.org/pod/Socket)’s `sockaddr_family()` to determine the
+    address family, then `unpack_sockaddr_in()` for Socket::AF\_INET or
+    `unpack_sockaddr_in6()` for Socket::AF\_INET6.
     - `rx_bytes` and `tx_bytes`
     - `persistent_keepalive_interval` (can be undef)
     - `last_handshake_time_sec` and `last_handshake_time_nsec`
