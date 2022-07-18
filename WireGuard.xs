@@ -163,7 +163,7 @@ add_device (SV* name_sv)
 
         int result = ix ? wg_del_device(devname) : wg_add_device(devname);
         if (result) {
-            croak("Failed to %s device `%s`: %s", ix ? "delete" : "add", devname, strerror(result));
+            croak("Failed to %s device `%s`: %s", ix ? "delete" : "add", devname, strerror(errno));
         }
 
 SV*
