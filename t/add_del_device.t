@@ -18,12 +18,12 @@ use Socket;
 use Data::Dumper;
 $Data::Dumper::Useqq = 1;
 
-my $devname = 't' . substr(rand, 2, 8);
+my $devname = 't' . substr( rand, 2, 8 );
 
 {
-    local $> = 1;  # fails if non-root, but we don’t care
+    local $> = 1;    # fails if non-root, but we don’t care
     my $errstr = do { local $! = Errno::EPERM; "$!" };
-    my $err = exception { Linux::WireGuard::add_device($devname) };
+    my $err    = exception { Linux::WireGuard::add_device($devname) };
     like $err, qr<$errstr>, 'add_device() as non-root: error';
 }
 
@@ -34,41 +34,41 @@ SKIP: {
 
     note "Created temporary device: $devname";
 
-    my $guard = Guard::guard( sub {
-		    note "Deleting temporary device: $devname";
-		    Linux::WireGuard::del_device($devname);
-	    } );
+    my $guard = Guard::guard(
+        sub {
+            note "Deleting temporary device: $devname";
+            Linux::WireGuard::del_device($devname);
+        }
+    );
 
     my @names = Linux::WireGuard::list_device_names();
 
-	cmp_deeply(
-	    \@names,
-	    superbagof( $devname ),
-	    'list_device_names() includes newly-created device',
-	);
+    cmp_deeply( \@names, superbagof($devname),
+        'list_device_names() includes newly-created device',
+    );
 
     my $device = Linux::WireGuard::get_device($devname);
 
-    my $uint_re = re( qr<\A[0-9]+\z> );
+    my $uint_re          = re(qr<\A[0-9]+\z>);
     my $optional_uint_re = any( undef, $uint_re );
-    my $optional_str = any( undef, re( qr<.> ) );
+    my $optional_str     = any( undef, re(qr<.>) );
 
-    my $ipv4_addr_len = length pack_sockaddr_in(0, "\0" x 4);
-    my $ipv6_addr_len = length pack_sockaddr_in6(0, "\0" x 16);
+    my $ipv4_addr_len = length pack_sockaddr_in( 0, "\0" x 4 );
+    my $ipv6_addr_len = length pack_sockaddr_in6( 0, "\0" x 16 );
 
     cmp_deeply(
         $device,
         {
-            name => $devname,
-            ifindex => $uint_re,
-            public_key => undef,
+            name        => $devname,
+            ifindex     => $uint_re,
+            public_key  => undef,
             private_key => undef,
-            fwmark => undef,
+            fwmark      => undef,
             listen_port => undef,
-            peers => [],
+            peers       => [],
         },
         'get_device()',
-    ) or diag explain $device;;
+    ) or diag explain $device;
 }
 
 done_testing;

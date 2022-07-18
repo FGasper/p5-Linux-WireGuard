@@ -17,6 +17,7 @@ easyxs/init.h
 easyxs/ppport.h
 lib/Linux/WireGuard.pm
 libwireguard.c
+t/add_del_device.t
 t/devices.t
 t/keys.t
 wireguard-tools/COPYING
