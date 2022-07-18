@@ -154,6 +154,18 @@ get_device (SV* name_sv)
     OUTPUT:
         RETVAL
 
+void
+add_device (SV* name_sv)
+    ALIAS:
+        del_device = 1
+    CODE:
+        const char* devname = exs_SvPVbyte_nolen(name_sv);
+
+        int result = ix ? wg_del_device(devname) : wg_add_device(devname);
+        if (result) {
+            croak("Failed to %s device `%s`: %s", ix ? "delete" : "add", devname, strerror(result));
+        }
+
 SV*
 generate_private_key()
     ALIAS:

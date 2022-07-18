@@ -11,9 +11,9 @@ Linux::WireGuard - [WireGuard](https://www.wireguard.com/) in Perl
 # DESCRIPTION
 
 Linux::WireGuard provides an interface to WireGuard via
-[Linux’s embedded wireguard C library](https://git.zx2c4.com/wireguard-tools/tree/contrib/embeddable-wg-library).
+[Linux’s embedded WireGuard C library](https://git.zx2c4.com/wireguard-tools/tree/contrib/embeddable-wg-library).
 
-NB: Although WireGuard itself is cross-platform, the embedded C
+NB: Although WireGuard itself is cross-platform, its embedded C
 library is Linux-specific.
 
 # FUNCTIONS
@@ -46,6 +46,14 @@ Returns a reference to a hash that describes the $NAME’d device:
         `inet_ntoa()` or `inet_ntop()`.
         - `cidr`
 
+## add\_device( $NAME )
+
+Adds a WireGuard device with the given $NAME.
+
+## del\_device( $NAME )
+
+Deletes a WireGuard device with the given $NAME.
+
 ## $bin = generate\_private\_key()
 
 Returns a newly-generated private key (raw string).
@@ -60,7 +68,7 @@ Returns a newly-generated preshared key (raw string).
 
 # TODO
 
-The interface is incomplete. It would be nice for it to be complete.
+An implementations of `set_device()` would be nice to have.
 
 # LICENSE & COPYRIGHT
 

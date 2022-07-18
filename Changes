@@ -3,6 +3,7 @@ Revision history for Perl extension Linux::WireGuard:
 0.02
 - Rename Wireguard -> WireGuard.
 - Make `endpoint` undef if there is no endpoint for a given peer.
+- Added add_device() and del_device().
 - Added tests.
 - Fix repo information in Makefile.PL.
 
