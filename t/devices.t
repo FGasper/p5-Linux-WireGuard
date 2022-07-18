@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Linux::Wireguard;
+use Linux::WireGuard;
 
 use Test::More;
 use Test::FailWarnings;
@@ -15,7 +15,7 @@ use Socket;
 use Data::Dumper;
 $Data::Dumper::Useqq = 1;
 
-my @names = Linux::Wireguard::list_device_names();
+my @names = Linux::WireGuard::list_device_names();
 
 cmp_deeply(
     \@names,
@@ -28,7 +28,7 @@ note explain \@names;
 SKIP: {
     skip 'get_device() requires root' if $>;
 
-    my @devices = map { Linux::Wireguard::get_device($_) } @names;
+    my @devices = map { Linux::WireGuard::get_device($_) } @names;
 
     my $uint_re = re( qr<\A[0-9]+\z> );
     my $optional_uint_re = any( undef, $uint_re );

@@ -6,9 +6,9 @@ use ExtUtils::MakeMaker::CPANfile;
 die "OS not supported: $^O$/" if $^O ne 'linux';
 
 WriteMakefile(
-    NAME              => 'Linux::Wireguard',
-    VERSION_FROM      => 'lib/Linux/Wireguard.pm', # finds $VERSION
-    ABSTRACT_FROM  => 'lib/Linux/Wireguard.pm', # retrieve abstract from module
+    NAME              => 'Linux::WireGuard',
+    VERSION_FROM      => 'lib/Linux/WireGuard.pm', # finds $VERSION
+    ABSTRACT_FROM  => 'lib/Linux/WireGuard.pm', # retrieve abstract from module
     AUTHOR         => [
         'Felipe Gasper (FELIPE)',
     ],
@@ -17,7 +17,6 @@ WriteMakefile(
 
     INC => join(
         q< >,
-        "-Iwirwguard.h",
         '-Wall',
         '-std=c99',
     ),
@@ -35,11 +34,11 @@ WriteMakefile(
         resources => {
             repository => {
                 type => 'git',
-                url => 'git://github.com/FGasper/p5-Wasm-Wasm3.git',
-                web => 'https://github.com/FGasper/p5-Wasm-Wasm3',
+                url => 'git://github.com/FGasper/p5-Linux-WireGuard.git',
+                web => 'https://github.com/FGasper/p5-Linux-WireGuard',
             },
             bugtracker => {
-                web => 'https://github.com/FGasper/p5-Wasm-Wasm3/issues',
+                web => 'https://github.com/FGasper/p5-Linux-WireGuard/issues',
             },
         },
     },

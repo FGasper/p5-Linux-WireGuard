@@ -2,7 +2,7 @@ Changes
 MANIFEST
 Makefile.PL
 README.md
-Wireguard.xs
+WireGuard.xs
 cpanfile
 easyxs/LICENSE
 easyxs/README.md
@@ -15,7 +15,7 @@ easyxs/easyxs_string.h
 easyxs/easyxs_structref.h
 easyxs/init.h
 easyxs/ppport.h
-lib/Linux/Wireguard.pm
+lib/Linux/WireGuard.pm
 libwireguard.c
 t/devices.t
 t/keys.t

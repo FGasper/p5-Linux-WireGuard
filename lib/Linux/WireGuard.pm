@@ -1,4 +1,4 @@
-package Linux::Wireguard;
+package Linux::WireGuard;
 
 use strict;
 use warnings;
@@ -7,18 +7,21 @@ use warnings;
 
 =head1 NAME
 
-Linux::Wireguard - L<Wireguard|https://www.wireguard.com/> in Perl
+Linux::WireGuard - L<WireGuard|https://www.wireguard.com/> in Perl
 
 =head1 SYNOPSIS
 
-    my @names = Linux::Wireguard::list_device_names();
+    my @names = Linux::WireGuard::list_device_names();
 
-    my %device = map { $_ => Linux::Wireguard::get_device($_) } @names;
+    my %device = map { $_ => Linux::WireGuard::get_device($_) } @names;
 
 =head1 DESCRIPTION
 
-Linux::Wireguard provides an interface to Wireguard via the
-embedded wireguard C library.
+Linux::WireGuard provides an interface to WireGuard via
+L<Linux’s embedded wireguard C library|https://git.zx2c4.com/wireguard-tools/tree/contrib/embeddable-wg-library>.
+
+NB: Although WireGuard itself is cross-platform, the embedded C
+library is Linux-specific.
 
 =cut
 
@@ -26,7 +29,7 @@ embedded wireguard C library.
 
 use XSLoader;
 
-our $VERSION = '0.01';
+our $VERSION = '0.01_90';
 
 XSLoader::load( __PACKAGE__, $VERSION );
 
@@ -108,12 +111,11 @@ The interface is incomplete. It would be nice for it to be complete.
 
 Copyright 2022 Gasper Software Consulting. All rights reserved.
 
-Linux::Wireguard is licensed under the same terms as Perl itself (cf.
+Linux::WireGuard is licensed under the same terms as Perl itself (cf.
 L<perlartistic>); B<HOWEVER>, the embedded C wireguard library has its
-own copyright terms. Use of Linux::Wireguard I<may> imply acceptance of
-that embedded C library’s own copyright terms. See
-F<wireguard-tools/contrib/embeddable-wg-library/README> in this
-distribution for details.
+own copyright terms. Use of Linux::WireGuard I<may> imply acceptance of
+that embedded C library’s own copyright terms. See this distribution’s
+F<wireguard-tools/contrib/embeddable-wg-library/README> for details.
 
 =cut
 

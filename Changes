@@ -1,8 +1,10 @@
-Revision history for Perl extension Linux::Wireguard:
+Revision history for Perl extension Linux::WireGuard:
 
 0.02
-- Added tests.
+- Rename Wireguard -> WireGuard.
 - Make `endpoint` undef if there is no endpoint for a given peer.
+- Added tests.
+- Fix repo information in Makefile.PL.
 
 0.01 Sat 16 Jul 2022
 - Initial release

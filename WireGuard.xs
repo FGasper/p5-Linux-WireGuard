@@ -2,7 +2,7 @@
 
 #include "wireguard.h"
 
-#define PERL_NS "Linux::Wireguard"
+#define PERL_NS "Linux::WireGuard"
 
 #define IPV4_STRLEN sizeof( ((struct sockaddr_in*) NULL)->sin_addr.s_addr)
 #define IPV6_STRLEN sizeof( ((struct sockaddr_in6*) NULL)->sin6_addr)
@@ -108,7 +108,7 @@ static HV* _wgdev_to_hv (pTHX_ wg_device *dev) {
 
 // ----------------------------------------------------------------------
 
-MODULE = Linux::Wireguard       PACKAGE = Linux::Wireguard
+MODULE = Linux::WireGuard       PACKAGE = Linux::WireGuard
 
 PROTOTYPES: DISABLE
 
