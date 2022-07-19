@@ -41,7 +41,7 @@ thrown exception) C<$!> become Errno::EPERM.
 
 use XSLoader;
 
-our $VERSION = '0.01_90';
+our $VERSION = '0.02';
 
 XSLoader::load( __PACKAGE__, $VERSION );
 
@@ -125,7 +125,7 @@ Returns a newly-generated preshared key (raw string).
 
 =head1 TODO
 
-An implementations of C<set_device()> would be nice to have.
+An implementation of C<set_device()> would be nice to have.
 
 =head1 LICENSE & COPYRIGHT
 

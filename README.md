@@ -80,7 +80,7 @@ Returns a newly-generated preshared key (raw string).
 
 # TODO
 
-An implementations of `set_device()` would be nice to have.
+An implementation of `set_device()` would be nice to have.
 
 # LICENSE & COPYRIGHT
 
