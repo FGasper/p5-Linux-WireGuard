@@ -23,6 +23,18 @@ L<Linux’s embedded WireGuard C library|https://git.zx2c4.com/wireguard-tools/t
 NB: Although WireGuard itself is cross-platform, its embedded C
 library is Linux-specific.
 
+=head1 CHARACTER ENCODING
+
+All strings into & out of this module are byte strings.
+
+=head1 ERROR HANDLING
+
+Failures become Perl exceptions. Currently those exceptions are
+plain strings. Errors that come from WireGuard also manifest as
+changes to Perl’s C<$!> global; for example, if you try to
+C<get_device()> while non-root, you’ll probably see (besides the
+thrown exception) C<$!> become Errno::EPERM.
+
 =cut
 
 #----------------------------------------------------------------------

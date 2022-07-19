@@ -20,17 +20,20 @@ $Data::Dumper::Useqq = 1;
 
 my $devname = 't' . substr( rand, 2, 8 );
 
+my $eperm_str = do { local $! = Errno::EPERM; "$!" };
+
 {
-    local $> = 1;    # fails if non-root, but we don’t care
-    my $errstr = do { local $! = Errno::EPERM; "$!" };
+    local $> = 1999;    # fails if non-root, but we don’t care
     my $err    = exception { Linux::WireGuard::add_device($devname) };
-    like $err, qr<$errstr>, 'add_device() as non-root: error';
+    like $err, qr<$eperm_str>, 'add_device() as non-root: error';
 }
 
 SKIP: {
-    skip 'Tests require root', 1 if $>;
-
-    Linux::WireGuard::add_device($devname);
+    my $err = exception { Linux::WireGuard::add_device($devname) };
+    if ($err) {
+        skip "Failed to add device: $err", 1 if $err =~ m<$eperm_str>;
+        die $err;
+    }
 
     note "Created temporary device: $devname";
 

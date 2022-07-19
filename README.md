@@ -16,6 +16,18 @@ Linux::WireGuard provides an interface to WireGuard via
 NB: Although WireGuard itself is cross-platform, its embedded C
 library is Linux-specific.
 
+# CHARACTER ENCODING
+
+All strings into & out of this module are byte strings.
+
+# ERROR HANDLING
+
+Failures become Perl exceptions. Currently those exceptions are
+plain strings. Errors that come from WireGuard also manifest as
+changes to Perl’s `$!` global; for example, if you try to
+`get_device()` while non-root, you’ll probably see (besides the
+thrown exception) `$!` become Errno::EPERM.
+
 # FUNCTIONS
 
 ## @names = list\_device\_names()
